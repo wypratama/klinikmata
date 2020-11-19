@@ -20,6 +20,7 @@
         <th scope="col">Perawatan</th>
         <th scope="col">Resep</th>
         <th scope="col">Jadwal</th>
+        <th scope="col">Action</th>
       </thead>
       <tbody>
         <% data.forEach(element => { %>
@@ -28,12 +29,9 @@
           <td><%= element.Resep%></td>
           <td><%= element.Jadwal %></td>
           <td>
-            <!-- <a href="/daftar-pasien/<%= element.id %>/edit"
+            <a href="/form-treatments/<%= element.id %>/edit"
               ><button class="btn btn-success">Edit</button>
             </a>
-            <a href="/daftar-pasien/<%= element.id %>/delete"
-              ><button class="btn btn-danger">Delete</button>
-            </a> -->
           </td>
         </tr>
         <% }) %>

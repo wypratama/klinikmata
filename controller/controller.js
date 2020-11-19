@@ -1,4 +1,5 @@
-const { Pasien, Dokter, Treatment } = require('../models');
+const { Pasien, Dokter, Treatment, PasienTreatment } = require('../models');
+const nodemailer = require('nodemailer');
 
 class Controller {
   static daftarPasien(req, res) {
@@ -24,7 +25,21 @@ class Controller {
       createdAt: new Date(),
       updatedAt: new Date(),
     };
+    let pasientTreatment = {
+      pasienId: '',
+      treatmentId: '',
+    };
     Pasien.create(objPasien)
+      .then((data) => {
+        pasientTreatment.pasienId = data.id;
+        return Treatment.create({
+          Jadwal: req.body.jadwal,
+        });
+      })
+      .then((data) => {
+        pasientTreatment.treatmentId = data.id;
+        return PasienTreatment.create(pasientTreatment);
+      })
       .then((data) => {
         res.redirect('/daftar-pasien');
       })
@@ -83,6 +98,63 @@ class Controller {
         res.send(err);
       });
   }
+
+  static formTreatment(req, res) {
+    let id = Number(req.params.id);
+    Treatment.findByPk(id)
+      .then((data) => {
+        // console.log(data);
+        res.render('formtreatment', { data });
+      })
+      .catch((err) => {
+        res.send(err);
+      });
+  }
+
+  static showFormTreatment(req, res) {
+    let id = Number(req.params.id);
+    let objTreatment = {
+      id: Number(req.params.id),
+      Perawatan: req.body.perawatan,
+      Resep: req.body.resep,
+    };
+    Treatment.update(objTreatment, { where: { id: id } })
+      .then((data) => {
+        Treatment.findByPk(id, { include: { model: Pasien } })
+          .then((data) => {
+            // console.log(data.Pasiens[0].Email)
+            var transporter = nodemailer.createTransport({
+              service: 'Gmail',
+              auth: {
+                user: 'diptaniti@gmail.com',
+                pass: 'namasaya123',
+              },
+            });
+
+            var mailOptions = {
+              from: 'diptaniti@gmail.com',
+              to: `${data.Pasiens[0].Email}`,
+              subject: 'Hasil Perawatan Klinik Permata',
+              text: `Nama: ${data.Pasiens[0].Nama}\n` + `No.Telepon: ${data.Pasiens[0].No_Telepon}\n` + `Alamat: ${data.Pasiens[0].Alamat}\n` + `Perawatan: ${req.body.perawatan} \n` + `Resep : ${req.body.resep}`,
+            };
+
+            transporter.sendMail(mailOptions, function (error, info) {
+              if (error) {
+                console.log(error);
+              } else {
+                console.log('Email sent: ' + info.response);
+              }
+            });
+          })
+          .catch((err) => {
+            console.log(err)
+          })
+      })
+      .catch((err) => {
+        res.send(err);
+      });
+  }
+
 }
 
 module.exports = Controller;

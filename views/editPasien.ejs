@@ -3,28 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="x-ua-compatible" content="ie=edge" />
-    <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css" />
-
-    <!-- Theme style -->
-    <link rel="stylesheet" href="dist/css/adminlte.min.css" />
-    <!-- Google Font: Source Sans Pro -->
-    <link
-      href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700"
-      rel="stylesheet"
-    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
     <title>Edit</title>
   </head>
-  <body class="hold-transition sidebar-mini">
-    <div class="wrapper">
-        <nav class="main-header navbar navbar-expand navbar-white navbar-light">
-          <ul class="navbar-nav">
-            <li class="nav-item"></li>
-          </ul>
-        </nav>
-        <a href="/daftar-pasien">
-            <button type="submit" class="btn btn-danger">Kembali</button>
-          </a>
+  <body>
+    <%- include ('modules/navbar.ejs') %>
     <h1>Edit Students Data</h1>
     <form action="/daftar-pasien/<%= data.id %>/edit" method="POST">
         <div class="mb-3">

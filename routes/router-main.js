@@ -23,10 +23,13 @@ router.post('/daftar', Controller.hasilPendaftaran);
 router.get('/daftar-pasien/:id/edit', Controller.formEditPasien);
 router.post('/daftar-pasien/:id/edit', Controller.editPasien);
 router.get('/daftar-pasien/:id/delete', Controller.hapusPasien);
+
 //RES CONFIRMATION
 // router.post('/sendmail', sendMail);
 
 router.get('/treatments', Controller.showTreatment);
+router.get('/form-treatments/:id/edit', Controller.formTreatment);
+router.post('/form-treatments/:id/edit', Controller.showFormTreatment);
 
 //INPUT RECEIPT/DIAGNOSE
 
