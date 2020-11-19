@@ -1,7 +1,7 @@
 {
   "development": {
     "username": "postgres",
-    "password": "qwer",
+    "password": "diptaniti",
     "database": "klinikmatadb",
     "host": "127.0.0.1",
     "dialect": "postgres"
