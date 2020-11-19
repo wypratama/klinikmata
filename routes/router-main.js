@@ -4,7 +4,7 @@ const router = require ('express').Router()
 
 //HOME
 router.get('/', (req, res) => {
-    res.render('tes')
+    res.render('dashboard')
 })
 //ADD RESERVATION
 
