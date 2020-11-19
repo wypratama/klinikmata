@@ -15,9 +15,10 @@ class ControllerLogin {
             }
         })
         .then (user => {
-            console.log(req.body.password, user.password)
+            
             if (compareHash(req.body.password, user.password)) {
-                console.log(res)
+                req.session.username = user.username
+                req.session.name = user.name
                 res.redirect('/daftar-pasien')
             }
         })
@@ -39,6 +40,16 @@ class ControllerLogin {
         })
         .catch(err => {
             res.send(err)
+        })
+    }
+
+    static logOut (req, res) {
+        req.session.destroy (err => {
+            if (err) {
+                res.send(err)
+            } else {
+                res.redirect('/')
+            }
         })
     }
 }

@@ -10,6 +10,22 @@ class Helper {
     static compareHash (password, hash) {
         return bcrypt.compareSync(password, hash);
     }
+
+    static loggedIn (req, res, next) {
+        if (req.session.username) {
+            next()
+        } else {
+            res.redirect ('/')
+        }
+    }
+
+    static preventAccessLogin (req, res, next) {
+        if (req.session.username) {
+            res.redirect ('/daftar-pasien')
+        } else {
+            next()
+        }
+    }
 }
 
 module.exports = Helper
