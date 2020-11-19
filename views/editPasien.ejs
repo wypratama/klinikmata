@@ -10,21 +10,25 @@
     <%- include ('modules/navbar.ejs') %>
     <h1>Edit Students Data</h1>
     <form action="/daftar-pasien/<%= data.id %>/edit" method="POST">
-        <div>
+        <div class="mb-3">
             <label for="">Nama</label>
             <input type="text" name="Nama" value=<%= data.Nama %>>
-        <div>
-            <label for="">No_Telepon</label>
+        </div>
+        <div class="mb-3">
+            <label for="">No.Telepon</label>
             <input type="integer" name="No_Telepon" value=<%= data.No_Telepon %>>
-        <div>
+        </div>
+        <div class="mb-3">
             <label for="">Alamat</label>
             <input type="text" name="Alamat" value=<%= data.Alamat %>>
-        <div>
-            <label for="">Email Date</label>
+        </div>
+        <div class="mb-3"></div>
+            <label for="">Email</label>
             <input type="email" name="Email" value=<%= data.Email %>>
         </div>
 
-        <button type="submit">Edit Data</button>
+        <button type="submit" class="btn btn-primary">Edit Data</button>
     </form>
+    </div>
   </body>
 </html>

@@ -1,4 +1,4 @@
-const express = require('express')
+const express = require('express');
 const router = express.Router();
 const Controller = require('../controller/controller');
 const ControllerLogin = require('../controller/controller-login')
@@ -14,7 +14,7 @@ router.get('/register', preventAccessLogin, ControllerLogin.getRegister);
 router.post('/register', preventAccessLogin, ControllerLogin.postRegister);
 
 //HARUS SUDAH LOGIN DARI SINI
-router.use (loggedIn)
+router.use(loggedIn);
 
 //PASIEN
 router.get('/daftar-pasien', Controller.daftarPasien);
@@ -28,9 +28,13 @@ router.get('/daftar-pasien/:id/delete', Controller.hapusPasien);
 //RESERVATION
 router.get('/reservasi', ControllerReservation.getAll)
 
+router.get('/treatments', Controller.showTreatment);
+router.get('/form-treatments/:id/edit', Controller.formTreatment);
+router.post('/form-treatments/:id/edit', Controller.showFormTreatment);
+
 //INPUT RECEIPT/DIAGNOSE
 
 //LOGOUT
-router.get('/logout', ControllerLogin.logOut)
+router.get('/logout', ControllerLogin.logOut);
 
 module.exports = router;

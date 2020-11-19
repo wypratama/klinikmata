@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+</head>
+
+<body>
+  <h1>Form Perawatan</h1>
+  <form action="/form-treatments/<%= data.id %>/edit" method="POST">
+    <div class="mb-3">
+      <label for="" class="form-label">Perawatan</label>
+      <input type="text" name="perawatan" class="form-control" />
+    </div>
+    <div class="mb-3">
+      <label for="" class="form-label">Resep</label>
+      <input type="integer" name="resep" class="form-control" />
+    </div>
+    <div class="mb-3">
+      <label for="" class="form-label">Jadwal</label>
+      <input disabled type="text" name="Jadwal" value=<%= data.Jadwal %>>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</body>
+
+</html>
