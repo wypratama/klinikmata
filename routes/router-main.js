@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const Controller = require('../controller/controller');
-const ControllerLogin = require('../controller/controller-login');
-const { loggedIn, preventAccessLogin } = require('../helpers/helper');
-const { sendMail } = require('../helpers/nodemailer');
+const ControllerLogin = require('../controller/controller-login')
+const ControllerReservation = require ('../controller/controller-reservation')
+const { loggedIn, preventAccessLogin } = require ('../helpers/helper')
 
 //LOGIN
 
@@ -16,7 +16,7 @@ router.post('/register', preventAccessLogin, ControllerLogin.postRegister);
 //HARUS SUDAH LOGIN DARI SINI
 router.use(loggedIn);
 
-//ADD RESERVATION
+//PASIEN
 router.get('/daftar-pasien', Controller.daftarPasien);
 router.get('/daftar', Controller.pendaftaranPasien);
 router.post('/daftar', Controller.hasilPendaftaran);
@@ -24,8 +24,9 @@ router.get('/daftar-pasien/:id/edit', Controller.formEditPasien);
 router.post('/daftar-pasien/:id/edit', Controller.editPasien);
 router.get('/daftar-pasien/:id/delete', Controller.hapusPasien);
 
-//RES CONFIRMATION
-// router.post('/sendmail', sendMail);
+
+//RESERVATION
+router.get('/reservasi', ControllerReservation.getAll)
 
 router.get('/treatments', Controller.showTreatment);
 router.get('/form-treatments/:id/edit', Controller.formTreatment);
