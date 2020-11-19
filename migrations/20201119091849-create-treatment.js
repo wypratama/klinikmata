@@ -17,6 +17,24 @@ module.exports = {
       Jadwal: {
         type: Sequelize.DATE,
       },
+      PasienId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Pasiens',
+          key: 'id'
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE'
+      },
+      DokterId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Dokters',
+          key: 'id'
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE'
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

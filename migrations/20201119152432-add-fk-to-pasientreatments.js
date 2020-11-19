@@ -8,8 +8,8 @@ module.exports = {
      * Example:
      * await queryInterface.createTable('users', { id: Sequelize.INTEGER });
      */
-    return queryInterface.addConstraint('PasienTreatments', {
-      fields: ['pasienId'],
+    return queryInterface.addConstraint('Treatments', {
+      fields: ['PasienId'],
       type: 'foreign key',
       name: 'add-pasien-fk-constraint',
       references: {
