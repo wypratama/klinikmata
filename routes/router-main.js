@@ -14,6 +14,9 @@ router.post('/register', ControllerLogin.postRegister);
 router.get('/daftar-pasien', Controller.daftarPasien);
 router.get('/daftar', Controller.pendaftaranPasien);
 router.post('/daftar', Controller.hasilPendaftaran);
+router.get('/daftar-pasien/:id/edit', Controller.formEditPasien);
+router.post('/daftar-pasien/:id/edit', Controller.editPasien);
+router.get('/daftar-pasien/:id/delete', Controller.hapusPasien);
 //RES CONFIRMATION
 
 //INPUT RECEIPT/DIAGNOSE
