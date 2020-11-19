@@ -16,24 +16,10 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
         unique: true,
-        validate: {
-          notEmpty : {
-            msg: 'Username tidak boleh kosong.'
-          },
-          isAlphanumeric: {
-            msg: 'Username hanya terdiri dari Angka dan Huruf.'
-          },
-          isNull: {
-            msg: 'Username tidak boleh kosong.'
-          }
-        }
       },
       password: {
         type: Sequelize.STRING,
         allowNull: false,
-        validate: {
-          
-        }
       },
       createdAt: {
         allowNull: false,

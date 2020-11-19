@@ -1,5 +1,6 @@
 const { Pasien, Dokter, Treatment } = require('../models');
 
+
 class Controller {
   static daftarPasien(req, res) {
     Pasien.findAll()

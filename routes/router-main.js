@@ -1,12 +1,14 @@
 const router = require('express').Router();
 const Controller = require('../controller/controller');
+const ControllerLogin = require('../controller/controller-login')
 
 //LOGIN
 
 //HOME
-router.get('/', (req, res) => {
-  res.render('tes');
-});
+router.get('/', ControllerLogin.getlogin);
+router.post('/', ControllerLogin.postlogin);
+router.get('/register', ControllerLogin.getRegister);
+router.post('/register', ControllerLogin.postRegister);
 
 //ADD RESERVATION
 router.get('/daftar-pasien', Controller.daftarPasien);

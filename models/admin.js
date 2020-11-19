@@ -1,4 +1,6 @@
 'use strict';
+const { generateHash } = require ('../helpers/helper')
+
 const {
   Model
 } = require('sequelize');
@@ -14,10 +16,54 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Admin.init({
-    name: DataTypes.STRING,
-    username: DataTypes.STRING,
-    password: DataTypes.STRING
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty : {
+          msg: 'Nama tidak boleh kosong.'
+        }
+      }
+    },
+    username:  {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+      validate: {
+        notEmpty : {
+          msg: 'Username tidak boleh kosong.'
+        },
+        isAlphanumeric: {
+          msg: 'Username hanya terdiri dari Angka dan Huruf.'
+        },
+        notNull: {
+          msg: 'Username tidak boleh kosong.'
+        }
+      }
+    },
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty : {
+          msg: 'Password tidak boleh kosong.'
+        },
+        notNull: {
+          msg: 'Password tidak boleh kosong.'
+        },
+        minLength (value) {
+          if (value.length < 6) {
+            throw new Error('Password minimal 6 karakter')
+          } 
+        }
+      }
+    }
   }, {
+    hooks: {
+      beforeCreate(instance, options) {
+        instance.password = generateHash(instance.password)
+      }
+    },
     sequelize,
     modelName: 'Admin',
   });
