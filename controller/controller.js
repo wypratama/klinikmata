@@ -1,6 +1,5 @@
 const { Pasien, Dokter, Treatment } = require('../models');
 
-
 class Controller {
   static daftarPasien(req, res) {
     Pasien.findAll()
@@ -70,6 +69,17 @@ class Controller {
         res.redirect('/daftar-pasien');
       })
       .catch((err) => {
+        res.send(err);
+      });
+  }
+
+  static showTreatment(req, res) {
+    Treatment.findAll()
+      .then((data) => {
+        res.render('treatment', { data });
+      })
+      .catch((err) => {
+        console.log(err);
         res.send(err);
       });
   }
