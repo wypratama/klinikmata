@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edit</title>
+  </head>
+  <body>
+    <h1>Edit Students Data</h1>
+    <form action="/daftar-pasien/<%= data.id %>/edit" method="POST">
+        <div>
+            <label for="">Nama</label>
+            <input type="text" name="Nama" value=<%= data.Nama %>>
+        <div>
+            <label for="">No_Telepon</label>
+            <input type="integer" name="No_Telepon" value=<%= data.No_Telepon %>>
+        <div>
+            <label for="">Alamat</label>
+            <input type="text" name="Alamat" value=<%= data.Alamat %>>
+        <div>
+            <label for="">Email Date</label>
+            <input type="email" name="Email" value=<%= data.Email %>>
+        </div>
+
+        <button type="submit">Edit Data</button>
+    </form>
+  </body>
+</html>
