@@ -7,7 +7,7 @@ class ControllerLogin {
     }
 
     static postlogin (req, res) {
-        console.log(req.body.username)
+        console.log(req.body)
         Admin
         .findOne ({
             where: {
@@ -15,7 +15,6 @@ class ControllerLogin {
             }
         })
         .then (user => {
-            
             if (compareHash(req.body.password, user.password)) {
                 req.session.username = user.username
                 req.session.name = user.name
