@@ -1,14 +1,19 @@
-const router = require('express').Router();
+const express = require('express')
+const router = express.Router();
 const Controller = require('../controller/controller');
 const ControllerLogin = require('../controller/controller-login')
+const { loggedIn, preventAccessLogin } = require ('../helpers/helper')
 
 //LOGIN
 
 //HOME
-router.get('/', ControllerLogin.getlogin);
-router.post('/', ControllerLogin.postlogin);
-router.get('/register', ControllerLogin.getRegister);
-router.post('/register', ControllerLogin.postRegister);
+router.get('/', preventAccessLogin, ControllerLogin.getlogin);
+router.post('/', preventAccessLogin, ControllerLogin.postlogin);
+router.get('/register', preventAccessLogin, ControllerLogin.getRegister);
+router.post('/register', preventAccessLogin, ControllerLogin.postRegister);
+
+//HARUS SUDAH LOGIN DARI SINI
+router.use (loggedIn)
 
 //ADD RESERVATION
 router.get('/daftar-pasien', Controller.daftarPasien);
@@ -20,5 +25,8 @@ router.get('/daftar-pasien/:id/delete', Controller.hapusPasien);
 //RES CONFIRMATION
 
 //INPUT RECEIPT/DIAGNOSE
+
+//LOGOUT
+router.get('/logout', ControllerLogin.logOut)
 
 module.exports = router;
