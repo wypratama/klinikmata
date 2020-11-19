@@ -56,6 +56,12 @@
           <label for="" class="form-label">Jadwal</label>
           <input type="date" name="jadwal" class="form-control" />
         </div>
+        <select class="custom-select custom-select-lg mb-3" name="dokter">
+          <option selected disabled>Pilih Dokter</option>
+        <% for (let i = 0; i < data.length; i++) { %>
+            <option value="<%= data[i].id %>"><%= data[i].Nama %><One></option>
+        <% } %>
+            </select>
         <!-- <a href="/daftar-pasien"> -->
         <button type="submit" class="btn btn-primary">Daftar</button>
         <!-- </a> -->

@@ -13,7 +13,12 @@ class Controller {
       });
   }
   static pendaftaranPasien(req, res) {
-    res.render('reservasi');
+    Dokter
+    .findAll()
+    .then (data => {
+      console.log(data)
+      res.render('reservasi', {data});
+    })
   }
 
   static hasilPendaftaran(req, res) {
@@ -25,20 +30,17 @@ class Controller {
       createdAt: new Date(),
       updatedAt: new Date(),
     };
-    let pasientTreatment = {
-      pasienId: '',
-      treatmentId: '',
+
+    let jadwalBaru = {
+      Jadwal: req.body.jadwal,
+      PasienId: '',
+      DokterId: req.body.dokter,
     };
     Pasien.create(objPasien)
       .then((data) => {
-        pasientTreatment.pasienId = data.id;
-        return Treatment.create({
-          Jadwal: req.body.jadwal,
-        });
-      })
-      .then((data) => {
-        pasientTreatment.treatmentId = data.id;
-        return PasienTreatment.create(pasientTreatment);
+        jadwalBaru.PasienId = data.id;
+        console.log(jadwalBaru)
+        return Treatment.create(jadwalBaru);
       })
       .then((data) => {
         res.redirect('/daftar-pasien');
