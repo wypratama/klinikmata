@@ -1,4 +1,4 @@
-const { Pasien, Dokter, Treatment } = require('../models');
+const { Pasien, Dokter, Treatment, PasienTreatment } = require('../models');
 
 
 class Controller {
@@ -25,9 +25,23 @@ class Controller {
       createdAt: new Date(),
       updatedAt: new Date(),
     };
+    let pasientTreatment = {
+      pasienId:'',
+      treatmentId: ''
+    }
     Pasien.create(objPasien)
       .then((data) => {
-        res.redirect('/daftar-pasien');
+        pasientTreatment.pasienId = data.id
+        return Treatment.create({
+          Jadwal: req.body.jadwal
+        })
+      })
+      .then(data => {
+        pasientTreatment.treatmentId = data.id
+        return PasienTreatment.create(pasientTreatment)
+      })
+      .then (data => {
+           res.redirect('/daftar-pasien');
       })
       .catch((err) => {
         res.send(err);
