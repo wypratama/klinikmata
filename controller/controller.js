@@ -35,6 +35,8 @@ class Controller {
       Jadwal: req.body.jadwal,
       PasienId: '',
       DokterId: req.body.dokter,
+      createdAt: new Date(),
+      updatedAt: new Date(),
     };
     Pasien.create(objPasien)
       .then((data) => {
@@ -91,8 +93,11 @@ class Controller {
   }
 
   static showTreatment(req, res) {
-    Treatment.findAll()
+    Treatment.findAll({
+      attributes: {include: ['id']}
+    })
       .then((data) => {
+        console.log(data)
         res.render('treatment', { data });
       })
       .catch((err) => {
@@ -120,10 +125,12 @@ class Controller {
       Perawatan: req.body.perawatan,
       Resep: req.body.resep,
     };
+
     Treatment.update(objTreatment, { where: { id: id } })
-      .then((data) => {
-        Treatment.findByPk(id, { include: { model: Pasien } })
-          .then((data) => {
+      .then((dataUpdate) => { console.log(dataUpdate)
+        Pasien.findByPk(dataUpdate.PasienId)
+          .then((dataPasien) => {
+            res.send(dataPasien)
             // console.log(data.Pasiens[0].Email)
             var transporter = nodemailer.createTransport({
               service: 'Gmail',
