@@ -14,11 +14,11 @@ class Controller {
   }
   static pendaftaranPasien(req, res) {
     Dokter
-    .findAll()
-    .then (data => {
-      console.log(data)
-      res.render('reservasi', {data});
-    })
+      .findAll()
+      .then(data => {
+        console.log(data)
+        res.render('reservasi', { data });
+      })
   }
 
   static hasilPendaftaran(req, res) {
@@ -94,7 +94,7 @@ class Controller {
 
   static showTreatment(req, res) {
     Treatment.findAll({
-      attributes: {include: ['id']}
+      attributes: { include: ['id'] }
     })
       .then((data) => {
         console.log(data)
@@ -127,7 +127,8 @@ class Controller {
     };
 
     Treatment.update(objTreatment, { where: { id: id } })
-      .then((dataUpdate) => { console.log(dataUpdate)
+      .then((dataUpdate) => {
+        // console.log(dataUpdate)
         Pasien.findByPk(dataUpdate.PasienId)
           .then((dataPasien) => {
             res.send(dataPasien)

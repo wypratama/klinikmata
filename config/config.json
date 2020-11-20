@@ -1,8 +1,8 @@
 {
   "development": {
     "username": "postgres",
-    "password": "qwer",
-    "database": "klinikmatadb2",
+    "password": "diptaniti",
+    "database": "klinikmatadb",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },
@@ -14,10 +14,10 @@
     "dialect": "mysql"
   },
   "production": {
-    "username": "root",
-    "password": null,
-    "database": "database_production",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
+    "username": "bxxzxvctutpvhx",
+    "password": "7a3afd3cc6e4ee9f229918295204170544dc3431c012e49df4d285bc560a939a",
+    "database": "dfludc34poomm9",
+    "host": "ec2-54-166-114-48.compute-1.amazonaws.com",
+    "dialect": "postgres"
   }
 }
