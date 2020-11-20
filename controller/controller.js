@@ -119,50 +119,51 @@ class Controller {
   }
 
   static showFormTreatment(req, res) {
-    let id = Number(req.params.id);
+    let theMaskid = Number(req.params.id);
     let objTreatment = {
       id: Number(req.params.id),
       Perawatan: req.body.perawatan,
       Resep: req.body.resep,
     };
 
-    Treatment.update(objTreatment, { where: { id: id } })
-      .then((dataUpdate) => { console.log(dataUpdate)
-        Pasien.findByPk(dataUpdate.PasienId)
-          .then((dataPasien) => {
-            res.send(dataPasien)
-            // console.log(data.Pasiens[0].Email)
-            var transporter = nodemailer.createTransport({
-              service: 'Gmail',
-              auth: {
-                user: 'diptaniti@gmail.com',
-                pass: 'namasaya123',
-              },
-            });
+    Treatment.update (objTreatment, {
+        where: {
+          id: theMaskid
+        },
+        returning: true
+    })
+    .then (data => {
+      console.log(data[1][0].PasienId)
+      Pasien.findByPk(data[1][0].PasienId)
+      .then (data => {
+        console.log(data)
+        var transporter = nodemailer.createTransport({
+          service: 'Gmail',
+          auth: {
+            user: 'diptaniti@gmail.com',
+            pass: 'namasaya123',
+          },
+        });
 
-            var mailOptions = {
-              from: 'diptaniti@gmail.com',
-              to: `${data.Pasiens[0].Email}`,
-              subject: 'Hasil Perawatan Klinik Permata',
-              text: `Nama: ${data.Pasiens[0].Nama}\n` + `No.Telepon: ${data.Pasiens[0].No_Telepon}\n` + `Alamat: ${data.Pasiens[0].Alamat}\n` + `Perawatan: ${req.body.perawatan} \n` + `Resep : ${req.body.resep}`,
-            };
+        var mailOptions = {
+          from: 'diptaniti@gmail.com',
+          to: `${data.Email}`,
+          subject: 'Hasil Perawatan Klinik Permata',
+          text: `Nama: ${data.Nama}\n` + `No.Telepon: ${data.No_Telepon}\n` + `Alamat: ${data.Alamat}\n` + `Perawatan: ${req.body.perawatan} \n` + `Resep : ${req.body.resep}`,
+        };
 
-            transporter.sendMail(mailOptions, function (error, info) {
-              if (error) {
-                console.log(error);
-              } else {
-                console.log('Email sent: ' + info.response);
-              }
-            });
-          })
-          .catch((err) => {
-            console.log(err)
-          })
+        transporter.sendMail(mailOptions, function (error, info) {
+          if (error) {
+            console.log(error);
+          } else {
+            console.log('Email sent: ' + info.response);
+          }
+        });
+        res.redirect('/')
       })
-      .catch((err) => {
-        res.send(err);
-      });
+    })
   }
+
 
 }
 
